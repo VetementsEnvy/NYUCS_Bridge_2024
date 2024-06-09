@@ -1,0 +1,95 @@
+Name: Junjie Zhang
+ 
+Email: jz5880@nyu.edu
+
+
+1) (3pts) Multiple Choice: c
+2) (3pts) Multiple Choice: c
+3) (3pts) Multiple Choice: d
+4) (3pts) Fill in the blank: semaphores
+5) (3pts) Fill in the blank: GET
+
+
+6) (10 pts) Short answer:
+If the data packet is transmitting at computer networks that is larger than MTU,
+it will be divided into small parts and reassembled at the source destination. if the packet does not
+fragment, the packet will be dropped, and an ICMP message will send back to the sender indicating the
+destination is unreachable.
+
+
+7) (10 pts) Short answer:
+when a program receives an interrupt while running the code, it is going to be turned to either ready or
+block state, and then PCB save the current process which can be restored later on. Finally, the CPU is going
+to pick a new process to run.
+
+
+
+
+8) (15 pts) Short answer:
+Eliminating the ability to have a circular wait ususlly can be done by assigning priority to each resource,
+the process that holds a higher resource cannot acquire a lower resource. Therefore, A wait for B, B wait
+for C, and C wait for A secnario will not happen because C cannot acquire a lower level resource.
+
+
+9) (10 pts) Short answer:
+In order to form a TCP socket, we use 3-way handskae stategy:
+1).the client sent a SYN packet to the server
+2).the server receives SYN packet, and sends back an SYN-ACK packet to acknowledge the client's request
+3).the user receives an SYN-ACK packet, and send back an ACK packet indicating the connection is successful
+
+
+10) (10 pts) Short answer:
+Given a system of paging without virtual memory, the MMU would look at TLB table where logical address is
+recoreded, and then it knows the frame number of each logical address. Eventually, the MMU combines the
+frame number with offset to form the physical address.
+
+11) (10 pts) Short answer:
+Here are three parts delay I would talk about:
+1). Processing Delay: The time for the router to figure out the packet's header and where to forward
+2). Queuing Delay: The time that a packet is waiting on the router's queue
+3).Propagation Delay: The time a packet takes to travel through hops to hops(physical medium)
+
+12) (20 pts) Write the code:
+
+#include <iostream>
+using namespace std;
+
+template <typename T>
+struct BSTNode
+{
+    T data;
+    BSTNode<T>* left;
+    BSTNode<T>* right;
+    BSTNode(T val): data(val), left(nullptr), right(nullptr) {}
+};
+
+bool compareWithBST(BSTNode<int>* root, const int& val)
+{
+    if(root == nullptr) return false;
+    if(root->data > val) return true;
+    //In BST the right most node has the largest val
+    return compareWithBST(root->right, val);
+}
+
+
+int main()
+{
+    BSTNode<int>* root = new BSTNode(10);
+    root->left = new BSTNode(5);
+    root->right = new BSTNode(14);
+    root->left->right = new BSTNode(8);
+    root->left->right->right = new BSTNode(9);
+    root->right->left = new BSTNode(11);
+    
+    int val = 13;
+    if(compareWithBST(root, val) == 1)
+    {
+        cout << "There is at least one value in the tree greater than the given value!"
+             << endl;
+    } else
+    {
+        cout << "There is no values in the tree greater than the given value"
+             << endl;
+    }
+    
+}
