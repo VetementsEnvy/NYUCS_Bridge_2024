@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "lowestTotalCost(int*, int):jz5880_hw8_q4.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "jumpIt(int*, int, int):jz5880_hw8_q4.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "board[index]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

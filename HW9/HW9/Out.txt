@@ -1,0 +1,6 @@
+Enter the file: Input.txt
+Sheryl Carter, you don't need to pay anything
+Dalton Smith,  you give Jason J. Jones $32.6
+Dalton Smith,  you give Natalie Johnson $0.6
+John Martin,  you give Natalie Johnson $44.2
+In the end, you should all have spent around $44.2
