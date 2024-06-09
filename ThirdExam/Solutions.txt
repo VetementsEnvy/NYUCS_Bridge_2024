@@ -1,0 +1,217 @@
+Name: Junjie Zhang
+ 
+
+NYU Email: jz5880@nyu.edu
+
+
+
+
+Solutions to midterm exam
+
+
+Question 1 (Multiple choice answer):c
+Question 2 (Multiple choice answer):c
+Question 3 (Multiple choice answer):b
+Question 4 (Expression):23+4*5-6-
+Question 5 (Value): 2
+
+Question 6 (Algorithm; English answer):
+1).we can use in order traverse to go through the tree
+2).For each node, we calculate the height difference by having max of its two
+children and puls one.
+3).If there is one node that has height differnece greate than 1, return false.
+Otherwise, return true
+4).Overall, the runtime complexity of this algorithm are expected to be O(n)
+
+
+Question 7 (Algorithm; English answer):
+1).I would have a vector that stores pointers of all the list nodes.
+2).the vector stores all nodes of the list(using node->prev to find the head, it
+allows us to iterating the entire list)
+3).then we use the sort algorithm(merge algorithm since it is efficient)
+  to sort the vector by node->val
+4).Finally, we'll have a new list to connect every node by iterating the
+ sorted vector;
+
+
+
+Question 8 (Program):
+
+#include <vector>
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+
+void insertSort(vector<int>& v)
+{
+    for(int i = 1; i < v.size(); i++)
+    {
+        int temp = v[i];
+        int j;
+        for(j = i; j > 0 && v[j-1] > temp; j--)
+        {
+            v[j] = v[j - 1];
+        }
+        v[j] = temp;
+    }
+}
+
+int main()
+{
+    ifstream inFile;
+    ofstream outFile;
+    vector<int> intVec;
+    int temp;
+    inFile.open("1.txt");
+    while(inFile >> temp)
+    {
+        intVec.push_back(temp);
+    }
+    inFile.close();
+    
+    
+    inFile.open("2.txt");
+    while(inFile >> temp)
+    {
+        intVec.push_back(temp);
+    }
+    inFile.close();
+    
+
+    insertSort(intVec);
+    outFile.open("3.txt");
+    for(int i: intVec)
+    {
+        outFile << i << endl;
+    }
+    outFile.close();
+}
+
+
+
+
+Question 9 (Program):
+#include <iostream>
+#include <list>
+#include <queue>
+using namespace std;
+
+
+
+template <class T>
+struct BSTNode
+{
+    T val;
+    BSTNode<T>* left;
+    BSTNode<T>* right;
+    BSTNode<T>* parent;
+    
+    BSTNode(T val, BSTNode<T>* left = nullptr, BSTNode<T>* right = nullptr,
+            BSTNode<T>* parent = nullptr): val(val), left(left),
+            right(right), parent(parent) {}
+};
+
+
+template <class T>
+list<T> inLevelOrderToList(BSTNode<T>* root)
+{
+    list<T> res;
+    queue<BSTNode<T>*> q;
+    if(root == nullptr) {return res;}
+    
+    q.push(root);
+    while(!q.empty())
+    {
+        BSTNode<T>* current = q.front();
+        q.pop();
+        res.push_back(current->val);
+        if(current->left != nullptr)
+        {
+            q.push(current->left);
+        }
+        if(current->right != nullptr)
+        {
+            q.push(current->right);
+        }
+    }
+    return res;
+}
+
+
+
+
+int main()
+{
+    BSTNode<int>* givenNode = new BSTNode<int>(5);
+    givenNode->left = new BSTNode<int>(3);
+    givenNode->left->left = new BSTNode<int>(2);
+    givenNode->left->right = new BSTNode<int>(4);
+    givenNode->right = new BSTNode<int>(7);
+    givenNode->right->left = new BSTNode<int>(6);
+    givenNode->right->right = new BSTNode<int>(8);
+    list<int> list = inLevelOrderToList(givenNode);
+    for(int i: list)
+    {
+        cout << i << endl;
+    }
+
+}
+
+
+
+
+
+
+Question 10: (Classes):
+#include <iostream>
+using namespace std;
+
+class devices
+{
+public:
+    devices(){}
+    virtual void showImage(int input) = 0;
+    
+};
+
+class Television:public devices
+{
+    
+public:
+    Television(){}
+    void showImage(int input) override
+    {
+        cout << input << "Television" <<endl;
+    }
+};
+
+class computer:public devices
+{
+    
+public:
+    computer(){}
+    void showImage(int input) override
+    {
+        cout << input << "Computer" <<endl;
+    }
+};
+
+int main()
+{
+    Television* tv = new Television();
+    Television* tv1 = new Television();
+    computer* cp = new computer();
+    computer* cp1 = new computer();
+    vector<devices*> vec;
+    vec.push_back(tv);
+    vec.push_back(tv1);
+    vec.push_back(cp);
+    vec.push_back(cp1);
+    for(int i = 0; i < vec.size(); i++)
+    {
+        vec[i]->showImage(i);
+    }
+}
+
